@@ -47,6 +47,16 @@ class ViewController: UIViewController
         
         managedObjectStudent.mobile = 8981833530
         
+        /* Course */
+        
+        let managedObjectCourse: Course = NSEntityDescription.insertNewObject(forEntityName: tblCourseName, into: DatabaseController.persistentContainer.viewContext) as! Course
+        
+        managedObjectCourse.courseId = 201
+        managedObjectCourse.couseName = "Computer Science"
+        
+        managedObjectStudent.addToRelationshipWithCourse(managedObjectCourse)
+        // managedObjectCourse.addToRelationshipWithStudent(managedObjectStudent)
+        
         DatabaseController.saveContext()
     }
     
