@@ -44,7 +44,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
     func applicationWillTerminate(_ application: UIApplication)
     {
-        DatabaseController.saveContext()
+        DatabaseController.saveContext { (flag) in
+            
+            if flag
+            {
+                print("SAVED")
+            }
+            else
+            {
+                print("NOT SAVED")
+            }
+        }
     }
 }
 

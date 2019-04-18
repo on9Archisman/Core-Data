@@ -32,7 +32,7 @@ final class DatabaseController
     
     // MARK: - Core Data Saving support
     
-    class func saveContext ()
+    static func saveContext (completionHandler: (Bool) -> ())
     {
         let context = DatabaseController.persistentContainer.viewContext
         
@@ -43,12 +43,18 @@ final class DatabaseController
                 try context.save()
                 
                 print("Data Saved")
+                
+                completionHandler(true)
             }
             catch
             {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+        else
+        {
+            completionHandler(false)
         }
     }
 }
