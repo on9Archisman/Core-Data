@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Course" representedClassName="Course" syncable="YES">
-        <attribute name="courseId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="courseId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="couseName" attributeType="String" syncable="YES"/>
         <relationship name="relationshipWithStudent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Student" inverseName="relationshipWithCourse" inverseEntity="Student" syncable="YES"/>
     </entity>

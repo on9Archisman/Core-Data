@@ -18,7 +18,7 @@ extension Course
     }
 
     @NSManaged public var couseName: String?
-    @NSManaged public var courseId: Int16
+    @NSManaged public var courseId: Int32
     @NSManaged public var relationshipWithStudent: NSSet?
 }
 

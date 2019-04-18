@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource
+class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, SecondVCDelegate
 {
     @IBOutlet weak var txtFirstName: UITextField!
     @IBOutlet weak var txtLastName: UITextField!
@@ -19,7 +19,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet weak var tableViewStudent: UITableView!
     
     let tblStudentName = String(describing: Student.self)
-    let tblCourseName = String(describing: Course.self)
     
     let datePicker = UIDatePicker()
     
@@ -51,6 +50,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        
+        view.endEditing(true)
         
         let fetchRequestStudent: NSFetchRequest<Student> = Student.fetchRequest()
         
@@ -164,6 +165,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     // MARK: IBAction
     @IBAction func actionSave(_ sender: Any)
     {
+        view.endEditing(true)
+        
         if (txtFirstName.text!.count == 0 || txtLastName.text!.count == 0 || txtDOB.text!.count == 0 || txtMobile.text!.count == 0)
         {
             alert(message: "Please fill all the fields !!")
@@ -228,11 +231,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         }
     }
     
-    @IBAction func actionCourse(_ sender: Any)
-    {
-        
-    }
-    
     // MARK: Miscellneous
     func alert(message: String)
     {
@@ -262,6 +260,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     {
         txtDOB.text = ""
         txtDOB.resignFirstResponder()
+    }
+    
+    // MARK: Custom Delegate
+    func selectedCourse(course: Course)
+    {
+        print("s vjv cvmncs vmnv nmv dsmvns mn")
     }
     
     /*
@@ -341,4 +345,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         
     }
     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "Segue"
+        {
+            if let nextViewController = segue.destination as? SecondViewController
+            {
+                nextViewController.customDelegate = self
+            }
+        }
+    }
 }
