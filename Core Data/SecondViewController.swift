@@ -9,9 +9,9 @@
 import UIKit
 import CoreData
 
-protocol SecondVCDelegate
+protocol SecondViewControllerDelegate
 {
-    func selectedCourse(course: Course)
+    func SelectCourse(course: Course?)
 }
 
 class SecondViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource
@@ -25,7 +25,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITableViewDe
     var searchResultCourse = [Course]()
     
     // Custom Delegate
-    var customDelegate: SecondVCDelegate?
+    var SecondViewControllerDelegate: SecondViewControllerDelegate!
     
     // MARK: VC Life Cycle
     override func viewDidLoad()
@@ -91,7 +91,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITableViewDe
         print("didSelectRowAt indexPath =", indexPath.row)
         
         let managedObjectCourse = searchResultCourse[indexPath.row]
-        customDelegate?.selectedCourse(course: managedObjectCourse)
+        SecondViewControllerDelegate?.SelectCourse(course: managedObjectCourse)
         dismiss(animated: true, completion: nil)
     }
     
@@ -154,6 +154,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITableViewDe
     // MARK: IBAction
     @IBAction func actionClose(_ sender: Any)
     {
+        SecondViewControllerDelegate.SelectCourse(course: nil)
         self.dismiss(animated: true, completion: nil)
     }
     

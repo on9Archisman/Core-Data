@@ -121,7 +121,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                 <state key="normal" title="Select Course"/>
                                 <connections>
-                                    <segue destination="G8s-tX-1PQ" kind="presentation" identifier="Segue" modalTransitionStyle="partialCurl" id="PPk-u6-XlZ"/>
+                                    <segue destination="G8s-tX-1PQ" kind="presentation" identifier="Segue" id="PPk-u6-XlZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iX8-4W-jWn">

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, SecondVCDelegate
+class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, SecondViewControllerDelegate
 {
     @IBOutlet weak var txtFirstName: UITextField!
     @IBOutlet weak var txtLastName: UITextField!
@@ -26,6 +26,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     var updateFlag: Bool = false
     var index: Int?
+    
+    var managedObjectCourse: Course?
     
     // MARK: VC Life Cycle
     override func viewDidLoad()
@@ -186,6 +188,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             let date = formatter.date(from: txtDOB.text!)
             managedObjectStudent.dob = date as NSDate?
             
+            if (managedObjectCourse != nil)
+            {
+                managedObjectStudent.addToRelationshipWithCourse(managedObjectCourse!)
+            }
+            
             DatabaseController.saveContext { (flag) in
                 
                 if flag
@@ -196,6 +203,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
                     txtMobile.text = ""
                     
                     updateFlag = false
+                    
+                    btnCourse.setTitle("Select Course", for: .normal)
                     
                     viewWillAppear(true)
                 }
@@ -216,6 +225,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             let date = formatter.date(from: txtDOB.text!)
             managedObjectStudent.dob = date as NSDate?
             
+            if (managedObjectCourse != nil)
+            {
+                managedObjectStudent.addToRelationshipWithCourse(managedObjectCourse!)
+            }
+            
             DatabaseController.saveContext { (flag) in
                 
                 if flag
@@ -224,6 +238,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
                     txtLastName.text = ""
                     txtDOB.text = ""
                     txtMobile.text = ""
+                    
+                    btnCourse.setTitle("Select Course", for: .normal)
                     
                     viewWillAppear(true)
                 }
@@ -263,9 +279,21 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     }
     
     // MARK: Custom Delegate
-    func selectedCourse(course: Course)
+    func SelectCourse(course: Course?)
     {
-        print("s vjv cvmncs vmnv nmv dsmvns mn")
+        if let course = course
+        {
+            print(course)
+            
+            btnCourse.setTitle("Selected Course ~ \(course.courseId)", for: .normal)
+            
+            managedObjectCourse = course
+        }
+        else
+        {
+            managedObjectCourse = nil
+        }
+        
     }
     
     /*
@@ -352,7 +380,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         {
             if let nextViewController = segue.destination as? SecondViewController
             {
-                nextViewController.customDelegate = self
+                nextViewController.SecondViewControllerDelegate = self
             }
         }
     }

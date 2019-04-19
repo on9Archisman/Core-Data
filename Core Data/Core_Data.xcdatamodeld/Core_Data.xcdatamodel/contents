@@ -10,7 +10,7 @@
         <attribute name="firstName" attributeType="String" syncable="YES"/>
         <attribute name="lastName" attributeType="String" syncable="YES"/>
         <attribute name="mobile" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="relationshipWithCourse" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Course" inverseName="relationshipWithStudent" inverseEntity="Course" syncable="YES"/>
+        <relationship name="relationshipWithCourse" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="relationshipWithStudent" inverseEntity="Course" syncable="YES"/>
     </entity>
     <elements>
         <element name="Course" positionX="-20.63671875" positionY="-126.66796875" width="128" height="88"/>
